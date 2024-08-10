@@ -1,4 +1,6 @@
-
+using Microsoft.EntityFrameworkCore;
+using OnlineJobPortal.Data;
+using OnlineJobPortal.Repository;
 namespace OnlineJobPortal
 {
     public class Program
@@ -10,7 +12,16 @@ namespace OnlineJobPortal
             // Add services to the container.
 
             builder.Services.AddControllers();
+            builder.Services.AddDbContext<ApplicationDbContext>(options=>options.UseSqlServer(builder.Configuration.GetConnectionString("JobPortalCS")));
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            builder.Services.AddTransient<IRecruiterRepository, RecruiterRepository>();
+            builder.Services.AddTransient<IJobsRepository,JobsRepository>();
+            builder.Services.AddTransient<IApplicationRepository, ApplicationRepository>();
+            builder.Services.AddTransient<ICountryRepository, CountryRepository>(); 
+            builder.Services.AddControllers().AddNewtonsoftJson();
+
+
+
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
