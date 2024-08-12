@@ -18,6 +18,7 @@ namespace OnlineJobPortal
             builder.Services.AddTransient<IJobsRepository,JobsRepository>();
             builder.Services.AddTransient<IApplicationRepository, ApplicationRepository>();
             builder.Services.AddTransient<ICountryRepository, CountryRepository>(); 
+            builder.Services.AddTransient<ICandidateRepository,CandidateRepository>();
             builder.Services.AddControllers().AddNewtonsoftJson();
 
 
